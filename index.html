@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>优学优盘 - 您的学习助手</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- 添加字体图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <span class="logo-text">优学优盘</span>
+                <span class="school-name">专供职校学生使用</span>
+            </div>
+            <button class="menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#products">产品展示</a></li>
+                <li><a href="#courses">视频教程</a></li>
+                <li><a href="#custom">私人定制</a></li>
+            </ul>
+        </nav>
+        <div class="hero">
+            <div class="snowfall"></div>
+            <h1>知识随身携带，学习随时开始</h1>
+            <p>高品质学习资源 | 专业视频教程 | 个性化定制服务</p>
+            <p class="highlight">轻松绕过机房管控</p>
+        </div>
+    </header>
+
+    <section id="products" class="section">
+        <div class="container">
+            <h2 class="title has-text-centered">精品U盘</h2>
+            <div class="product-container">
+                <!-- 左侧产品列表 -->
+                <div class="product-list">
+                    <div class="product-item">
+                        <div class="product-emoji">🛡️</div>
+                        <div class="product-info">
+                            <h3 class="product-title">隐身优盘</h3>
+                            <p class="product-desc">完美绕过机房监控，支持多种隐身模式</p>
+                        </div>
+                    </div>
+
+                    <div class="product-item">
+                        <div class="product-emoji">🔒</div>
+                        <div class="product-info">
+                            <h3 class="product-title">加密优盘</h3>
+                            <p class="product-desc">军事级加密技术，保护您的隐私安全</p>
+                        </div>
+                    </div>
+
+                    <div class="product-item">
+                        <div class="product-emoji">🔄</div>
+                        <div class="product-info">
+                            <h3 class="product-title">还原优盘</h3>
+                            <p class="product-desc">一键还原系统，无视任何监控软件</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右侧信息填写 -->
+                <div class="order-form">
+                    <h3>填写订购信息</h3>
+                    <form id="orderForm" name="order" method="POST" data-netlify="true" data-netlify-recaptcha="true" action="success.html">
+                        <!-- 添加隐藏的表单名称字段 -->
+                        <input type="hidden" name="form-name" value="order">
+                        
+                        <!-- 添加隐藏的配置字段 -->
+                        <input type="hidden" name="capacity" id="selectedCapacity">
+                        <input type="hidden" name="software" id="selectedSoftware">
+                        <input type="hidden" name="total_price" id="totalPrice">
+                        <input type="hidden" name="system" id="selectedSystem">
+                        <input type="hidden" name="distro" id="selectedDistro">
+                        
+                        <div class="form-group">
+                            <label for="name">姓名 <span class="required">*</span></label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group school-info" style="display: none;">
+                            <label for="major">专业 <span class="required">*</span></label>
+                            <input type="text" id="major" name="major">
+                        </div>
+                        
+                        <div class="form-group school-info" style="display: none;">
+                            <label for="class">班级 <span class="required">*</span></label>
+                            <input type="text" id="class" name="class">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">手机号码 <span class="required">*</span></label>
+                            <input type="tel" id="phone" name="phone" pattern="^1[3-9]\d{9}$" required>
+                            <span class="error-message" id="phone-error"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="qq">QQ号码 (选填)</label>
+                            <input type="text" id="qq" name="qq">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="school">是否为辉县市职业中等专业学校学生 <span class="required">*</span></label>
+                            <select id="school" name="school" required>
+                                <option value="">请选择</option>
+                                <option value="yes">是</option>
+                                <option value="no">否</option>
+                            </select>
+                        </div>
+
+                        <!-- 修改回选择配置按钮 -->
+                        <button type="button" class="buy-button" onclick="openPurchaseModal()">
+                            <i class="fas fa-shopping-cart"></i>
+                            选择配置
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="courses" class="section">
+        <h2>视频教程</h2>
+        <div class="course-grid">
+            <div class="course-card basic">
+                <div class="version-tag">基础版</div>
+                <div class="course-emoji">📚</div>
+                <h3>机房隐身基础教程</h3>
+                <div class="features">
+                    <ul>
+                        <li><i class="fas fa-check"></i> U盘使用教学</li>
+                        <li><i class="fas fa-check"></i> 基础隐身技巧</li>
+                        <li><i class="fas fa-check"></i> 常见问题解答</li>
+                        <li><i class="fas fa-times"></i> 高级隐身教程</li>
+                        <li><i class="fas fa-times"></i> 实战案例分析</li>
+                        <li><i class="fas fa-times"></i> 技术更新培训</li>
+                    </ul>
+                </div>
+                <div class="price-action">
+                    <span class="price">¥12<small>起</small></span>
+                    <button class="buy-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        立即购买
+                    </button>
+                </div>
+            </div>
+
+            <div class="course-card premium">
+                <div class="version-tag">高级版</div>
+                <div class="popular-badge">推荐</div>
+                <div class="course-emoji">🎓</div>
+                <h3>机房隐身高级教程</h3>
+                <div class="features">
+                    <ul>
+                        <li><i class="fas fa-check"></i> U盘使用教学</li>
+                        <li><i class="fas fa-check"></i> 基础隐身技巧</li>
+                        <li><i class="fas fa-check"></i> 常见问题解答</li>
+                        <li><i class="fas fa-check"></i> 高级隐身教程</li>
+                        <li><i class="fas fa-check"></i> 实战案例分析</li>
+                        <li><i class="fas fa-check"></i> 技术更新培训</li>
+                    </ul>
+                </div>
+                <div class="price-action">
+                    <span class="price">¥24<small>起</small></span>
+                    <button class="buy-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        立即购买
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="custom" class="section custom-service">
+        <div class="container">
+            <h2 class="section-title">私人定制服务</h2>
+            <p class="section-subtitle">为您量身打造专属解决方案</p>
+            
+            <div class="custom-features">
+                <!-- 定制服务特点 -->
+                <div class="feature-card">
+                    <div class="icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>安全可靠</h3>
+                    <p>采用高级加密技术，确保数据安全</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>功能定制</h3>
+                    <p>根据需求定制特殊功能</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>专业支持</h3>
+                    <p>一对一技术支持服务</p>
+                </div>
+            </div>
+            
+            <div class="custom-contact">
+                <h3>需要定制服务？</h3>
+                <p>请联系我们的客服人员，我们将为您提供专业的定制方案</p>
+                <button class="custom-btn" onclick="openCustomDialog()">
+                    <i class="fab fa-qq"></i>
+                    立即咨询
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 优学优盘 版权所有</p>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // 移动端菜单切换
+        const menuBtn = document.querySelector('.menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // 点击导航链接后关闭菜单
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // 滚动时隐藏菜单
+        window.addEventListener('scroll', () => {
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        !function (e, t, n, a, i, r, c) {
+            e[a] = e[a] || function () {
+                (e[a].a = e[a].a || []).push(arguments);
+            };
+            r = t.createElement(n);
+            c = t.getElementsByTagName(n)[0];
+            r.async = 1;
+            r.charset = "UTF-8";
+            r.src = "https://zhiniplugin.h5bqb.top/customer/widget/zhini.js?_t=";
+            c.parentNode.insertBefore(r, c);
+        }(window, document, "script", "_ZHINI");
+        _ZHINI({
+            channel_id: "679c57aebd237e2cc935549d", // 网页在线客服的渠道id，已自动填写；
+            client_id: "" // 顾客的唯一标识，可为空；
+        });
+    </script>
+</body>
+</html>
