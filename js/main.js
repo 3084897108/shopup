@@ -207,23 +207,17 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // 检查手机号提交限制
-        const canSubmit = await checkPhoneSubmitLimit(phone);
-        if (!canSubmit) {
-            phoneError.textContent = '该手机号1小时内已提交过订单，请稍后再试';
-            return;
-        }
-        
         // 清除错误提示
         phoneError.textContent = '';
         
         const school = document.getElementById('school').value;
         if (school === 'no') {
-            alert('抱歉，本产品仅限辉县市职业中等专业学校学生购买');
+            alert('抱歉，本产品仅限职校学生购买');
             return;
         }
         
-        // 继续提交表单的逻辑...
+        // 允许表单提交
+        this.submit();
     });
 
     // 实时验证手机号格式
@@ -548,12 +542,15 @@ function setupPurchaseModal(modal) {
                 .join(', ');
 
             // 更新表单隐藏字段
+            document.getElementById('selectedSystem').value = selectedSystem;
+            document.getElementById('selectedDistro').value = selectedDistro;
             document.getElementById('selectedCapacity').value = selectedCapacity;
             document.getElementById('selectedSoftware').value = selectedSoftware;
             document.getElementById('totalPrice').value = totalPrice;
 
-            // 提交 Netlify 表单
-            document.getElementById('orderForm').submit();
+            // 提交表单
+            const form = document.getElementById('orderForm');
+            form.submit();
             
             // 关闭弹窗
             modal.remove();
@@ -659,100 +656,6 @@ function setupPurchaseModal(modal) {
             updateTotalPrice();
         };
     });
-
-    // 更新提交逻辑
-    nextBtn.onclick = () => {
-        if (currentStep === totalSteps) {
-            // 获取所有配置信息
-            const selectedSystem = modal.querySelector('.system-options .selected')?.dataset.system;
-            const selectedDistro = modal.querySelector('.distro-options .selected')?.dataset.distro;
-            const selectedCapacity = modal.querySelector('.capacity-options .selected')?.dataset.capacity;
-            const selectedSoftware = Array.from(modal.querySelectorAll('.software-options input:checked'))
-                .map(input => input.parentElement.querySelector('span').textContent)
-                .join(', ');
-
-            // 更新表单隐藏字段
-            document.getElementById('selectedCapacity').value = selectedCapacity;
-            document.getElementById('selectedSoftware').value = selectedSoftware;
-            document.getElementById('totalPrice').value = totalPrice;
-
-            // 提交 Netlify 表单
-            document.getElementById('orderForm').submit();
-            
-            // 关闭弹窗
-            modal.remove();
-            return;
-        }
-
-        currentStep++;
-        
-        // 如果进入第二步且是 Linux 系统，设置 Linux 专用容量选项
-        if (currentStep === 2 && selectedSystem === 'linux') {
-            const capacityOptions = modal.querySelector('.capacity-options');
-            capacityOptions.innerHTML = `
-                <div class="option-card selected" data-capacity="8" data-price="10">
-                    <span class="size">8GB</span>
-                    <span class="price">¥10</span>
-                </div>
-                <div class="option-card premium-capacity" data-capacity="128" data-price="999">
-                    <span class="size">128GB</span>
-                    <span class="price">¥999</span>
-                    <div class="capacity-tip">
-                        <i class="fas fa-info-circle"></i>
-                        建议通过底部私人订制渠道购买大容量 Linux
-                    </div>
-                </div>
-            `;
-            bindCapacityEvents();
-            updateTotalPrice();
-        }
-        
-        // 如果是第3步完成后，显示确认页面
-        if (currentStep === 4) {
-            const confirmContent = modal.querySelector('.step-content[data-step="4"]');
-            const selectedSystem = modal.querySelector('.system-options .selected');
-            const selectedDistro = modal.querySelector('.distro-options .selected');
-            const selectedCapacity = modal.querySelector('.capacity-options .selected');
-            const selectedSoftware = Array.from(modal.querySelectorAll('.software-options input:checked'));
-
-            confirmContent.innerHTML = `
-                <h3>确认您的配置</h3>
-                <div class="confirm-details">
-                    <div class="confirm-item">
-                        <span class="label">系统类型：</span>
-                        <span class="value">${selectedSystem.querySelector('h4').textContent}</span>
-                    </div>
-                    ${selectedDistro ? `
-                        <div class="confirm-item">
-                            <span class="label">Linux发行版：</span>
-                            <span class="value">${selectedDistro.querySelector('h4').textContent}</span>
-                        </div>
-                    ` : ''}
-                    <div class="confirm-item">
-                        <span class="label">存储容量：</span>
-                        <span class="value">${selectedCapacity.querySelector('.size').textContent}</span>
-                    </div>
-                    ${selectedSoftware.length > 0 ? `
-                        <div class="confirm-item">
-                            <span class="label">已选软件：</span>
-                            <span class="value">${selectedSoftware.map(sw => 
-                                sw.parentElement.querySelector('span').textContent).join('、')}</span>
-                        </div>
-                    ` : ''}
-                    <div class="confirm-item total">
-                        <span class="label">总价：</span>
-                        <span class="value price">¥${totalPrice}</span>
-                    </div>
-                </div>
-                <div class="confirm-notice">
-                    <i class="fas fa-info-circle"></i>
-                    请确认以上配置无误，点击"完成"按钮提交订单
-                </div>
-            `;
-        }
-        
-        updateStepUI();
-    };
 }
 
 // 创建选购弹窗
