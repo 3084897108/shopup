@@ -321,7 +321,7 @@ function openCustomDialog() {
                 <p><i class="far fa-envelope"></i> 邮箱：vcby520@gmail.com</p>
             </div>
             <div class="qr-code">
-                <img src="images/wechat-qr.jpg" alt="微信二维码">
+                <img src="images/kf.jpg" alt="微信二维码">
                 <p>扫码添加客服微信</p>
             </div>
         </div>
@@ -987,7 +987,7 @@ function createContactModal() {
             <div class="contact-title">添加客服微信</div>
             <div class="contact-desc">扫描下方二维码添加客服微信，获取视频教程</div>
             <div class="contact-qr">
-                <img src="images/wx.jpg" alt="客服微信二维码">
+                <img src="images/kf.jpg" alt="客服微信二维码">
             </div>
             <div class="contact-notice">
                 <i class="fas fa-info-circle"></i>
