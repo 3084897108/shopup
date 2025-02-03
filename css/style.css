@@ -1659,4 +1659,46 @@ input:invalid {
 
 input.error {
     border-color: #dc3545;
+}
+
+/* 留言墙链接样式 */
+.nav-links .message-wall {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+    transition: all 0.3s ease;
+}
+
+.nav-links .message-wall i {
+    font-size: 1.1rem;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+.nav-links .message-wall:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .nav-links .message-wall {
+        justify-content: center;
+        width: 90%;
+        margin: 0.5rem auto;
+    }
 } 
